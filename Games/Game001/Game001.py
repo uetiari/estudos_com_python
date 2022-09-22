@@ -24,5 +24,8 @@ while True:
             # jogo fecha com a função declarada acima
             pygame.quit()
             exit()
+    # desenha um retângulo na tela e cor vermelha
+    # na posição de x, y, largura e altura
+    pygame.draw.rect(screen, (255,0,0), (200,300, 40, 50))
     # atualiza a tela a cada rodada do For
     pygame.display.update()
