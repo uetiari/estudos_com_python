@@ -26,6 +26,9 @@ while True:
             exit()
     # desenha um retângulo na tela e cor vermelha
     # na posição de x, y, largura e altura
-    pygame.draw.rect(screen, (255,0,0), (200,300, 40, 50))
+    pygame.draw.rect(screen, (255, 0, 0), (200, 300, 40, 50))
+    # desenhandum circulo na tela e cor azul
+    # na posição(centro) de x, y e no raio
+    pygame.draw.circle(screen, (0, 0, 255), (300, 270), 40)
     # atualiza a tela a cada rodada do For
     pygame.display.update()
