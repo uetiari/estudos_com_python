@@ -7,37 +7,46 @@ pygame.init()
 width = 640
 height = 480
 
-# variável iniciando rect no meio da tela
 x = width/2
-# variável iniciando em 0 para controle do movimento rect
-y = 0
+# altera pra começar com rect no meio da tela
+y = height/2
 
 screen = pygame.display.set_mode((width, height))
 
 pygame.display.set_caption('Game 001 em Python by Ariane Ueti')
 
-# para controlar velocidade baseado no frames
 clock = pygame.time.Clock()
 
 while True:
-    # usar frames por segundos
-    # qnt maior frames mais rápido
     clock.tick(30)
-    # para que preencha de volta com a cor preta
-    # ilusão do movimento do rect
+
     screen.fill((0, 0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-    # chamando as variáveis na tupla
+        # quando player aperta a tecla
+        ''' if event.type == KEYDOWN:
+            # usando padrão WSAD
+            if event.key == K_a:
+                x = x - 20
+            if event.key == K_d:
+                x = x + 20
+            # pra subir tem que ser - por ser invertido
+            if event.key == K_w:
+                y = y - 20
+            if event.key == K_s:
+                y = y + 20 '''
+    # para mover rect com a tecla pressionada
+    if pygame.key.get_pressed()[K_a]:
+        x = x - 20
+    if pygame.key.get_pressed()[K_d]:
+        x = x + 20
+    if pygame.key.get_pressed()[K_w]:
+        y = y - 20
+    if pygame.key.get_pressed()[K_s]:
+        y = y + 20
+
     pygame.draw.rect(screen, (255, 0, 0), (x, y, 40, 50))
-    # com o if ele retorna a posição 0
-    # fazendo o movimento recomeçar
-    if y >= height:
-        y = 0
-    # a cada iteração do for
-    # vai mudar diretamente na variável y
-    y = y + 5
 
     pygame.display.update()
