@@ -1,38 +1,67 @@
 import pygame
 from pygame.locals import *
-# fechar a janela
 from sys import exit
+from random import randint
 
-# inicializar o jogo
 pygame.init()
 
-# criar a tela com tuplas
 width = 640
 height = 480
+
+x = width/2
+y = height/2
+
+# define variáveis do rect_blue
+# randint escolhe valor aleatório entre dois parâmetros
+# valores já desconsiderando valores do rect
+x_blue = randint(40, 600)
+y_blue = randint(50, 430)
+
 screen = pygame.display.set_mode((width, height))
 
-# altera nome da janela do jogo
 pygame.display.set_caption('Game 001 em Python by Ariane Ueti')
 
-# criar loop para sempre atualizar e rodar o jogo
-# todo script deve ficar dentro do loop
+clock = pygame.time.Clock()
+
 while True:
-    # verificando se aconteceu algum evento
+    clock.tick(30)
+
+    screen.fill((0, 0, 0))
     for event in pygame.event.get():
-        # fechar a janela quando clicar para fechar
         if event.type == pygame.QUIT:
-            # jogo fecha com a função declarada acima
             pygame.quit()
             exit()
-    # desenha um retângulo na tela e cor vermelha
-    # na posição de x, y, largura e altura
-    pygame.draw.rect(screen, (255, 0, 0), (200, 300, 40, 50))
-    # desenhando um circulo na tela e cor azul
-    # na posição(centro) de x, y e no raio
-    pygame.draw.circle(screen, (0, 0, 255), (300, 270), 40)
-    # desenhando uma linha na tela e cor amarela
-    # na posição de x, y de dois pontos
-    # com espessura ao final
-    pygame.draw.line(screen, (255, 255, 0), (390, 0), (390, 600), 5)
-    # atualiza a tela a cada rodada do For
+        ''' if event.type == KEYDOWN:
+            # usando padrão WSAD
+            if event.key == K_a:
+                x = x - 20
+            if event.key == K_d:
+                x = x + 20
+            # pra subir tem que ser - por ser invertido
+            if event.key == K_w:
+                y = y - 20
+            if event.key == K_s:
+                y = y + 20 '''
+
+    # caso segurando a tecla
+    if pygame.key.get_pressed()[K_a]:
+        x = x - 20
+    if pygame.key.get_pressed()[K_d]:
+        x = x + 20
+    if pygame.key.get_pressed()[K_w]:
+        y = y - 20
+    if pygame.key.get_pressed()[K_s]:
+        y = y + 20
+
+    rect_red = pygame.draw.rect(screen, (255, 0, 0), (x, y, 40, 50))
+
+    # adiciona rect azul
+    rect_blue = pygame.draw.rect(screen, (0, 0, 255), (x_blue, y_blue, 40, 50))
+
+    # verificando se rect_red encosta(colliderect, colisão) no rect_blue
+    # td vez que colidir, rect_blue muda de posição aleatoriamente
+    if rect_red.colliderect(rect_blue):
+        x_blue = randint(40, 600)
+        y_blue = randint(50, 430)
+
     pygame.display.update()
