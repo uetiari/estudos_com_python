@@ -4,12 +4,21 @@ from sys import exit
 from random import randint
 
 pygame.init()
+# ajustar valores entre 0 e 1
+pygame.mixer.music.set_volume(0.1)
+# exceto música de fundo, TDS outros sons necessitam ser .wav
+soundtrack = pygame.mixer.music.load('/home/ariane/Área de Trabalho/PYGAMES/estudos_com_python/Games/Game001/BoxCat Games - CPU Talk.mp3')
+# música em loop usar -1 
+pygame.mixer.music.play(-1)
+
+colider = pygame.mixer.Sound('/home/ariane/Área de Trabalho/PYGAMES/estudos_com_python/Games/Game001/smw_coin.wav')
+# colider.set_volume(1)
 
 width = 640
 height = 480
 
-x = width/2
-y = height/2
+x = int(width/2)
+y = int(height/2)
 
 x_blue = randint(40, 600)
 y_blue = randint(50, 430)
@@ -53,6 +62,7 @@ while True:
         x_blue = randint(40, 600)
         y_blue = randint(50, 430)
         points = points + 1
+        colider.play()
 
     # recebe o texto que será exibido, e localização em X e Y
     screen.blit(format_text, (450, 40))
